@@ -18,7 +18,7 @@
         }
 
         const widget = document.createElement('a');
-        widget.className = 'widget-container';
+        widget.className = 'guru-widget-container';
         widget.href = link;
         widget.target = '_blank';
         widget.style.backgroundColor = backgroundColor;
@@ -26,10 +26,10 @@
         widget.style.fontFamily = `Inter, sans-serif`;
 
         const iconWrapper = document.createElement('div');
-        iconWrapper.className = 'widget-icon-wrapper';
+        iconWrapper.className = 'guru-widget-icon-wrapper';
         
         const icon = document.createElement('img');
-        icon.className = 'widget-icon';
+        icon.className = 'guru-widget-icon';
         icon.src = iconUrl;
         icon.alt = text;
 
@@ -37,7 +37,7 @@
         widget.appendChild(iconWrapper);
 
         const widgetText = document.createElement('div');
-        widgetText.className = 'widget-text';
+        widgetText.className = 'guru-widget-text';
         widgetText.textContent = text;
 
         widget.appendChild(widgetText);
@@ -46,46 +46,46 @@
 
         const style = document.createElement('style');
         style.textContent = `
-            .widget-container {
+            .guru-widget-container {
                 position: fixed;
                 ${margins.bottom ? `bottom: ${margins.bottom};` : ''}
                 ${margins.top ? `top: ${margins.top};` : ''}
                 ${margins.right ? `right: ${margins.right};` : ''}
                 ${margins.left ? `left: ${margins.left};` : ''}
-                width: 4.5rem;
-                height: 5rem;
-                border-radius: 0.3rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                cursor: pointer;
-                z-index: 1000;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                width: 4.5rem !important;
+                height: 5rem !important;
+                border-radius: 0.3rem !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                text-decoration: none !important;
+                cursor: pointer !important;
+                z-index: 1000 !important;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
                 a {
-                    text-decoration: none;
+                    text-decoration: none !important;
                 }
             }
-            .widget-icon-wrapper {
-                background-color: white;
-                padding: 0.1rem;
-                border-radius: 50%;
-                margin-bottom: 0.5rem;
+            .guru-widget-icon-wrapper {
+                background-color: white !important;
+                padding: 0.1rem !important;
+                border-radius: 50% !important;
+                margin-bottom: 0.5rem !important;
             }
-            .widget-icon {
-                width: 1.9rem;
-                height: 1.9rem;
-                object-fit: cover;
-                border-radius: 50%;
-                display: block;
+            .guru-widget-icon {
+                width: 1.9rem !important;
+                height: 1.9rem !important;
+                object-fit: cover !important;
+                border-radius: 50% !important;
+                display: block !important;
             }
-            .widget-text {
-                font-size: 1rem;
-                text-align: center;
-                font-weight: 600;
-                line-height: 1;
-                font-family: 'Inter', sans-serif;;
+            .guru-widget-text {
+                font-size: 1rem !important;
+                text-align: center !important;
+                font-weight: 600 !important;
+                line-height: 1 !important;
+                font-family: 'Inter', sans-serif !important;
             }
         `;
         document.head.appendChild(style);
