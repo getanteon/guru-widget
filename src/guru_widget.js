@@ -54,7 +54,7 @@
                 ${margins.left ? `left: ${margins.left};` : ''}
                 width: 4.5rem;
                 height: 5rem;
-                border-radius: 0.5rem;
+                border-radius: 0.3rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -96,9 +96,9 @@
     if (currentScript) {
         const text = currentScript.getAttribute('data-text') || 'Ask AI';
         const link = currentScript.getAttribute('data-link');
-        const backgroundColor = currentScript.getAttribute('data-bg-color') || '#F6A61D';
+        const backgroundColor = currentScript.getAttribute('data-bg-color') || '#F40003';
         const iconUrl = currentScript.getAttribute('data-icon-url');
-        const fontColor = currentScript.getAttribute('data-font-color') || '#000000';
+        const fontColor = currentScript.getAttribute('data-font-color') || '#ffffff';
         
         let margins = { bottom: '1rem', right: '1rem' }; // default margins
         const marginAttr = currentScript.getAttribute('data-margins');
