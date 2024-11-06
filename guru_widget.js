@@ -1,5 +1,22 @@
 (function() {
-    function createGuruWidget(text, link, backgroundColor, iconUrl, fontColor = '#000000') {
+    // Create a global namespace for our widget
+    window.GuruWidget = {
+        init: function(text, link, backgroundColor, iconUrl, fontColor, margins) {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => createGuruWidget(text, link, backgroundColor, iconUrl, fontColor, margins));
+            } else {
+                createGuruWidget(text, link, backgroundColor, iconUrl, fontColor, margins);
+            }
+        }
+    };
+
+    function createGuruWidget(text, link, backgroundColor, iconUrl, fontColor = '#000000', margins = { bottom: '1rem', right: '1rem' }) {
+        // Validate mandatory parameters
+        if (!link || !iconUrl) {
+            console.error('GuruWidget Error: Both link and iconUrl are required parameters');
+            return;
+        }
+
         const widget = document.createElement('a');
         widget.className = 'widget-container';
         widget.href = link;
@@ -31,8 +48,10 @@
         style.textContent = `
             .widget-container {
                 position: fixed;
-                bottom: 1rem;
-                right: 1rem;
+                ${margins.bottom ? `bottom: ${margins.bottom};` : ''}
+                ${margins.top ? `top: ${margins.top};` : ''}
+                ${margins.right ? `right: ${margins.right};` : ''}
+                ${margins.left ? `left: ${margins.left};` : ''}
                 width: 4.5rem;
                 height: 5rem;
                 border-radius: 0.5rem;
@@ -62,7 +81,7 @@
                 display: block;
             }
             .widget-text {
-                font-size: 0.9rem;
+                font-size: 1rem;
                 text-align: center;
                 font-weight: 600;
                 line-height: 1;
@@ -72,6 +91,30 @@
         document.head.appendChild(style);
     }
 
-    // Expose the function to the global scope
-    window.createGuruWidget = createGuruWidget;
+    // Auto-initialize when script loads
+    const currentScript = document.currentScript || document.querySelector('script[src*="guru_widget.js"]');
+    if (currentScript) {
+        const text = currentScript.getAttribute('data-text') || 'Ask AI';
+        const link = currentScript.getAttribute('data-link');
+        const backgroundColor = currentScript.getAttribute('data-bg-color') || '#F6A61D';
+        const iconUrl = currentScript.getAttribute('data-icon-url');
+        const fontColor = currentScript.getAttribute('data-font-color') || '#000000';
+        
+        let margins = { bottom: '1rem', right: '1rem' }; // default margins
+        const marginAttr = currentScript.getAttribute('data-margins');
+        if (marginAttr) {
+            try {
+                const customMargins = JSON.parse(marginAttr);
+                margins = { ...margins, ...customMargins };
+            } catch (e) {
+                console.error('GuruWidget Error: Invalid margins JSON format');
+            }
+        }
+        
+        if (!link || !iconUrl) {
+            console.error('GuruWidget Error: data-link and data-icon-url attributes are required');
+        } else {
+            window.GuruWidget.init(text, link, backgroundColor, iconUrl, fontColor, margins);
+        }
+    }
 })();
